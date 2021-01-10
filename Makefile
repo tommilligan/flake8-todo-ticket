@@ -1,4 +1,4 @@
-.PHONY: help clean coverage dev integrate lint package package-install pypi-install test upload uninstall
+.PHONY: help clean coverage dev integrate lint lint-fix package package-install pypi-install test update upload uninstall
 
 help:
 	@echo "This project assumes that an active Python virtualenv is present."
@@ -11,7 +11,7 @@ coverage:
 	codecov
 
 dev:
-	pip install "pipenv==2018.11.26"
+	pip install "pipenv==2020.11.15"
 	pipenv install --dev --deploy
 	pip install -e .
 
@@ -19,7 +19,13 @@ integrate:
 	pytest integrate
 
 lint:
-	isort -y
+	isort --diff .
+	black --check --diff .
+	flake8
+	mypy flake8_todo_ticket integrate
+
+lint-fix:
+	isort -y .
 	black .
 
 package:
@@ -33,11 +39,11 @@ pypi-install:
 	pip install -U --no-cache-dir "flake8-todo-ticket==${FLAKE8_TODO_TICKET_VERSION}"
 
 test:
-	isort --diff
-	black --check --diff .
-	flake8
-	mypy flake8_todo_ticket integrate
 	pytest --cov=./ flake8_todo_ticket
+
+update:
+	pipenv lock
+	pipenv install --dev --deploy
 
 upload:
 	twine upload dist/*
