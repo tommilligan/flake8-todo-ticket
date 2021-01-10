@@ -17,7 +17,7 @@ def is_incorrect_todo(todo_match: Match[str]) -> bool:
     # truncate original line to start of match
     # if matches correct pattern at start of line
     # return False
-    # otherwise, return True (may be other corredct matches after this one)
+    # otherwise, return True (may be other correct matches after this one)
     start_at_todo = todo_match.string[todo_match.start() :]
     match = RX_TODO_NAME_TICKET.match(start_at_todo)
     return not bool(match)

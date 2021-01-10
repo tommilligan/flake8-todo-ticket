@@ -13,7 +13,7 @@ def check(line: str) -> List[Flake8Result]:
 
 def test_todo_ticket() -> None:
     assert check("# TODO in comment") == [(2, T400)]  # noqa: T400
-    assert check("# FIXME") == []  # noqa: T100
+    assert check("# FIXME") == []
     assert check("TODO") == [(0, T400)]  # noqa: T400
 
 
