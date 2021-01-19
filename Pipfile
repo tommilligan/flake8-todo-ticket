@@ -10,7 +10,7 @@ flake8 = "~=3.7"
 isort = "~=5.7"
 mypy = "~=0.701"
 pytest = "~=6.2"
-pytest-cov = "~=2.7"
+pytest-cov = "~=2.11"
 twine = "~=1.13"
 wheel = "~=0.33"
 
